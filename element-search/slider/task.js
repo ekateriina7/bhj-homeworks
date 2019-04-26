@@ -1,10 +1,10 @@
 let current = 0;
 const slides = Array.from(document.querySelectorAll('.slider__item'));
-const switchRight = document.querySelector('.slider__arrow_next');
-const switchLeft = document.querySelector('.slider__arrow_prev')
+const arrows = document.querySelectorAll('.slider__arrow');
 
-switchRight.onclick = function () {
-	current++;
+const showSlides = function(){
+  if (this.classList.contains('slider__arrow_next')) {
+    current++;
 	for (let item of slides) {
 		item.className = 'slider__item';
 	}
@@ -12,10 +12,8 @@ switchRight.onclick = function () {
 		current = 0;
 	}
 	slides[current].className = 'slider__item slider__item_active';
-};
-
-switchLeft.onclick = function () {
-	current--;
+  } else {
+    current--;
 	for (let item of slides) {
 		item.className = 'slider__item';
 	}
@@ -23,4 +21,12 @@ switchLeft.onclick = function () {
 		current = slides.length - 1;
 	}
 	slides[current].className = 'slider__item slider__item_active';
-};
+    
+  }
+  
+}
+
+
+for( let i = 0; i<arrows.length; i++) {
+  arrows[i].onclick = showSlides;
+}
