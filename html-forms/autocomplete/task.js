@@ -68,11 +68,21 @@ class Autocomplete {
   }
 
   getMatches( text ) {
+    const matches = [];    
+    const options = Array.from(this.input.children);
+    options.forEach((element)=>{
+      if(element.textContent.includes(text) && text !== '') matches.push({'text':element.textContent,'value': element.getAttribute('value')});
+      
+    });  
+
+    return matches; 
+
+  }
+}
     /*
       TODO: этот метод нужно дописать
       text - фраза, которую вводят в поле поиска
       Метод должен вернуть массив.
-
       Он формируется на основе списка опций select-элемента (this.input)
       Подходящие опции - те, чей текст содержит то, что есть в аргументе text
       Необходимо вернуть массив объектов со свойствами:
@@ -81,13 +91,6 @@ class Autocomplete {
         value: 'Содержимое атрибута value'
       }
     */
-    return [
-      {
-        text: 'Чубакка',
-        value: '1'
-      }
-    ];
-  }
-}
-
+    
+  
 new Autocomplete( document.querySelector( '.autocomplete' ));
